@@ -1,6 +1,5 @@
-package com.ensat;
+package com.testpet;
 
-import com.ensat.entities.Pet;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +10,9 @@ import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
+
+import com.petfact.SpringBootWebApplication;
+import com.petfact.entities.Pet;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootWebApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

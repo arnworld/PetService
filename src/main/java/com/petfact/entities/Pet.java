@@ -1,13 +1,12 @@
-package com.ensat.entities;
+package com.petfact.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigDecimal;
 
 /**
- * Product entity.
+ * Pet entity.
  */
 @Entity
 public class Pet {

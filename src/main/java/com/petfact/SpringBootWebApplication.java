@@ -1,4 +1,4 @@
-package com.ensat;
+package com.petfact;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

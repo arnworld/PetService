@@ -1,8 +1,9 @@
-package com.ensat.services;
+package com.petfact.services;
 
-import com.ensat.entities.Pet;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.petfact.entities.Pet;
 
 public interface PetService {
 

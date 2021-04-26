@@ -1,7 +1,8 @@
-package com.ensat.repositories;
+package com.petfact.repositories;
 
-import com.ensat.entities.Pet;
 import org.springframework.data.repository.CrudRepository;
+
+import com.petfact.entities.Pet;
 
 public interface PetRepository extends CrudRepository<Pet, Integer> {
 

@@ -1,8 +1,5 @@
-package com.ensat.controllers;
+package com.petfact.controllers;
 
-import com.ensat.entities.Pet;
-import com.ensat.repositories.PetRepository;
-import com.ensat.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.petfact.entities.Pet;
+import com.petfact.exception.ResourceNotFoundException;
+import com.petfact.repositories.PetRepository;
+import com.petfact.services.PetService;
+
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * Pet controller.
  */
@@ -57,11 +57,13 @@ public class PetController {
 
     
     @GetMapping("/pets/{id}")
-    public ResponseEntity<Pet> getUsersById(@PathVariable(value = "id") Integer petId){
+    public ResponseEntity<Pet> getUsersById(@PathVariable(value = "id") Integer petId) throws ResourceNotFoundException {
+
       Pet pet =
     		  petService
               .getPetById(petId);
-      return ResponseEntity.ok().body(pet);
+      if (pet == null) throw new ResourceNotFoundException("Pet not found on :: " + petId);
+      return ResponseEntity.ok().body(pet);    	
     }
     
     /**
@@ -75,9 +77,10 @@ public class PetController {
     
     @PutMapping("/pets/{id}")
     public ResponseEntity<Pet> updateUser(
-        @PathVariable(value = "id") Integer petId, @Valid @RequestBody Pet petDetails) {
+        @PathVariable(value = "id") Integer petId, @Valid @RequestBody Pet petDetails) throws ResourceNotFoundException {
 
       Pet pet = petService.getPetById(petId);
+      if (pet == null) throw new ResourceNotFoundException("Pet not found on :: " + petId);
       pet.setName(petDetails.getName());
       pet.setType(petDetails.getType());
       pet.setPrice(petDetails.getPrice());
@@ -104,10 +107,13 @@ public class PetController {
      * @return
      */
     @DeleteMapping("/pet/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Integer petId) {
+    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Integer petId)throws ResourceNotFoundException {
+      Pet pet =
+      		  petService
+                .getPetById(petId);
+        if (pet == null) throw new ResourceNotFoundException("Pet not found on :: " + petId);
       petService.deletePet(petId);
 
-      //userRepository.delete(user);
       Map<String, Boolean> response = new HashMap<>();
       response.put("deleted", Boolean.TRUE);
       return response;
