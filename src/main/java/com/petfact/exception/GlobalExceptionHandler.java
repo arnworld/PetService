@@ -19,9 +19,9 @@ public class GlobalExceptionHandler {
   /**
    * Resource not found exception response entity.
    *
-   * @param ex the ex
-   * @param request the request
-   * @return the response entity
+   * @param ex the exception
+   * @param request
+   * @return response entity
    */
   @ExceptionHandler(ResourceNotFoundException.class)
   public ResponseEntity<?> resourceNotFoundException(
@@ -34,9 +34,9 @@ public class GlobalExceptionHandler {
   /**
    * Global exception handler response entity.
    *
-   * @param ex the ex
-   * @param request the request
-   * @return the response entity
+   * @param ex the exception
+   * @param request
+   * @return response entity
    */
   @ExceptionHandler(Exception.class)
   public ResponseEntity<?> globleExcpetionHandler(Exception ex, WebRequest request) {
