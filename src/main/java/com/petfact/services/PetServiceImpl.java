@@ -1,6 +1,9 @@
 package com.petfact.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.petfact.entities.Pet;
@@ -24,8 +27,10 @@ public class PetServiceImpl implements PetService {
     @Override
     public List<Pet> listAllPets() {
     	List<Pet> pets = new ArrayList<>();
-        petRepository.findAll().forEach(pets::add);
-        return pets;
+        //petRepository.findAll(new PageRequest(1, 100, 
+          //      new Sort(new Sort.Order(Sort.Direction.ASC, "id")))).forEach(pets::add);
+        Page<Pet> petsRecord = petRepository.findAll(new PageRequest(0, 100));
+        return petsRecord.getContent();
     }
 
     @Override
